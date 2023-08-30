@@ -14,8 +14,55 @@ class CartItem extends React.Component{
 
     }
     increaseQuantity = () =>{
-        console.log('this', this);
-        console.log('this.state', this.state);
+        // console.log('this', this);
+        // console.log('this.state', this.state);
+
+        // setState is a function that comes from Component class
+        //calling setState function will rerender our component
+
+
+        //setState form 1: by passing object to rerender the changes
+        // this.setState({
+        //     qty: this.state.qty + 1
+        // });
+
+
+        //setState form 2: by passing a function     --> if previous state requires use this form
+        this.setState((prevState) =>{
+            return {
+                qty: prevState.qty + 1
+            }
+        });
+
+    }
+
+    decreaseQuantity = () =>{
+        this.setState({
+            qty: this.state.qty - 1
+        });
+
+
+        /*
+        this.setState((prevState) =>{
+            return {
+                qty: prevState.qty - 1
+            }
+        });
+        */
+    }
+
+    deleteQuantity = () =>{
+        this.setState({
+            qty: this.state.qty - this.state.qty
+        });
+
+        /*
+            this.setState((prevState) =>{
+            return {
+                qty: prevState.qty - prevState.qty
+            }
+        });
+        */
     }
     render() {
         //object destructing || want these properties from state object
@@ -41,13 +88,13 @@ class CartItem extends React.Component{
                             alt='decrease' 
                             className='action-icons' 
                             src='https://cdn-icons-png.flaticon.com/128/992/992683.png' 
-                        
+                            onClick={this.decreaseQuantity}
                         />
                         <img 
                             alt='delete' 
                             className='action-icons' 
                             src='https://cdn-icons-png.flaticon.com/128/3405/3405244.png' 
-                            
+                            onClick={this.deleteQuantity}
                         />
                     </div>
                 </div>
